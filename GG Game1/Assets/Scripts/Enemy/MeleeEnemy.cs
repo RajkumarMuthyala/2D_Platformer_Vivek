@@ -3,21 +3,30 @@ using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
 {
+    [Header ("Attack Parameter")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
-    [SerializeField] private float colliderDistance;
     [SerializeField] private int damage;
-    private float cooldownTimer = Mathf.Infinity;
+
+    [Header("Collider Parameter")]
+    [SerializeField] private float colliderDistance;
     [SerializeField] BoxCollider2D boxCollider;
+
+    [Header("Player Layer")]
     [SerializeField] LayerMask playerLayer;
+    private float cooldownTimer = Mathf.Infinity;
+
 
     private Animator anim;
     private Health playerHealth;
 
+    private EnemyPatrol enemyPatrol;
+
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();    
+        anim = GetComponent<Animator>(); 
+        enemyPatrol = GetComponentInParent<EnemyPatrol>();
     }
 
 
@@ -35,7 +44,11 @@ public class MeleeEnemy : MonoBehaviour
             }
         }
 
+        if (enemyPatrol != null) 
+        {
+            enemyPatrol.enabled = !PlayerInsight();
 
+        }
 
     }
 
