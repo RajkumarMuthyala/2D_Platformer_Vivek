@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 9029459394987808486}
   - component: {fileID: 5623909235296417564}
   - component: {fileID: 2269979135341156367}
+  - component: {fileID: 4862190865719930946}
   m_Layer: 9
-  m_Name: Knight_idle_01
+  m_Name: MeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,6 +170,8 @@ MonoBehaviour:
   startingHealth: 3
   iFramesDuration: 0
   numberOfFlashes: 0
+  components:
+  - {fileID: 2269979135341156367}
 --- !u!114 &2269979135341156367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,9 +186,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 2
   range: 5
-  colliderDistance: 0
   damage: 2
+  colliderDistance: 0
   boxCollider: {fileID: 9029459394987808486}
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &4862190865719930946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4133239042609916505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bf081f48c75bc498e73bb511ed0a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

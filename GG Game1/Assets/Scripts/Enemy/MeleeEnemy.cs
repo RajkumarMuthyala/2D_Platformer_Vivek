@@ -80,6 +80,6 @@ public class MeleeEnemy : MonoBehaviour
             playerHealth.TakeDamage(damage);
         
         }
-        }
+    }
 
 }
