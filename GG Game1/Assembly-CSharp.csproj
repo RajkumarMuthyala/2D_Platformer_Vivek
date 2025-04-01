@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Rooms\Door.cs" />
     <Compile Include="Assets\Scripts\Enemy\MeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Traps\Enemy_Sideways.cs" />
+    <Compile Include="Assets\Scripts\Core\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Health\Health.cs" />
     <Compile Include="Assets\Scripts\Traps\EnemyProjectile.cs" />
     <Compile Include="Assets\Scripts\Core\CameraController.cs" />

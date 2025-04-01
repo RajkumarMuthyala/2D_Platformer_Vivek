@@ -229,6 +229,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  fireballSound: {fileID: 0}
 --- !u!114 &5638343978985227921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +248,7 @@ MonoBehaviour:
   components:
   - {fileID: 2023374484525177195}
   - {fileID: 6896167485837306966}
+  deathSound: {fileID: 8300000, guid: b9e77ab6915057647ba2552d2c123825, type: 3}
 --- !u!1 &4284541229350447208
 GameObject:
   m_ObjectHideFlags: 0
