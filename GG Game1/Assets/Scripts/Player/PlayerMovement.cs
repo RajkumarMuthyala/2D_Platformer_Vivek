@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCoolDown;
     private float horizontalInput;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip jumpSound;
+
     private void Awake()
     {
         // Grab references for rigidbody and animator from game object.
@@ -54,10 +57,12 @@ public class PlayerMovement : MonoBehaviour
             }
             else { body.gravityScale = 5; 
             }
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
-                Debug.Log("Space key pressed"); // Debugging Key Press
                 Jump();
+                if(Input.GetKeyDown(KeyCode.Space) && isgrounded() )
+                    SoundManager.instance.PlaySound(jumpSound);
+
 
             }
         }
@@ -71,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+       
         if (isgrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpForce); // Use jumpForce

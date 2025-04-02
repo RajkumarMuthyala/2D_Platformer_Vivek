@@ -173,6 +173,7 @@ MonoBehaviour:
   components:
   - {fileID: 2269979135341156367}
   deathSound: {fileID: 8300000, guid: b9e77ab6915057647ba2552d2c123825, type: 3}
+  hurtSound: {fileID: 8300000, guid: a44b6072f674abc49a892ac252d3c4cc, type: 3}
 --- !u!114 &2269979135341156367
 MonoBehaviour:
   m_ObjectHideFlags: 0

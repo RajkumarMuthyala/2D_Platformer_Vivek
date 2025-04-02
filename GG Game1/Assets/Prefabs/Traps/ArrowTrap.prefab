@@ -91,6 +91,7 @@ MonoBehaviour:
   - {fileID: 3378019541298660236}
   - {fileID: 2874545577352662127}
   - {fileID: 5989243738797627981}
+  arrowTrapSound: {fileID: 8300000, guid: 594f7c1689cc4d740b89ff4d4af7b86b, type: 3}
 --- !u!1 &4610345459015175103
 GameObject:
   m_ObjectHideFlags: 0

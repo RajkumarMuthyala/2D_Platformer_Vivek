@@ -147,6 +147,7 @@ MonoBehaviour:
   damage: 1
   activationDelay: 2
   activeTime: 2
+  fireTrapSound: {fileID: 8300000, guid: 5da8afd8637646c458e9ee49d8646aab, type: 3}
 --- !u!95 &8693525075968073434
 Animator:
   serializedVersion: 5
