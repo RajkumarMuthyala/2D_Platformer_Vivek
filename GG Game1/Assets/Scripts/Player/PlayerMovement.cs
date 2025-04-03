@@ -5,18 +5,28 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header ("Movement Parameter")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce; // Separate variable for jump force
+
+    [Header ("Coyote Time")]
+    [SerializeField] private float coyoteTime;
+    private float coyoteCounter;
+
+    [Header ("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+
+
+    [Header("SFX")]
+    [SerializeField] private AudioClip jumpSound;
+
     private Rigidbody2D body;
     private Animator anim;
     private BoxCollider2D boxcollider;
     private float wallJumpCoolDown;
     private float horizontalInput;
 
-    [Header("SFX")]
-    [SerializeField] private AudioClip jumpSound;
 
     private void Awake()
     {
@@ -41,63 +51,70 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("grounded", isgrounded());
         anim.SetBool("Jump", !isgrounded());
 
-        //wallJump logic
-        if (wallJumpCoolDown > 0.2f)
+        //Jump
+        if (Input.GetKeyDown(KeyCode.Space))
+            Jump();
+
+        //Adjustable jump height
+        if(Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0)
+            body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
+
+        if (onWall())
         {
-           
-
-            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-
-            if (onWall() && !isgrounded())
-            {
-
-                body.gravityScale = 0;
-                body.velocity = Vector2.zero;
-
-            }
-            else { body.gravityScale = 5; 
-            }
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Jump();
-                if(Input.GetKeyDown(KeyCode.Space) && isgrounded() )
-                    SoundManager.instance.PlaySound(jumpSound);
-
-
-            }
+            body.gravityScale = 0;
+            body.velocity = Vector2.zero;
         }
         else
         {
-            wallJumpCoolDown += Time.deltaTime;
+            body.gravityScale = 7;
+            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+
+            if(isgrounded())
+            {
+                coyoteCounter = coyoteTime;
+            }
+            else
+            {
+                coyoteCounter -= Time.deltaTime;
+            }
+
         }
+
 
     }
 
 
     private void Jump()
     {
-       
-        if (isgrounded())
+        if(coyoteCounter <= 0 && !onWall()) return;
+        SoundManager.instance.PlaySound(jumpSound);
+
+        if(onWall())
         {
-            body.velocity = new Vector2(body.velocity.x, jumpForce); // Use jumpForce
-            anim.SetBool("Jump", true);
-        }else if(onWall() && !isgrounded())
-        {
-
-            if (horizontalInput == 0)
-            {
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
-            }
-            else
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
-
-            wallJumpCoolDown = 0;
-            
+            WallJump();
         }
+        else
+        {
+            if(isgrounded())
+                body.velocity = new Vector2(body.velocity.x, jumpForce);
+            else
+            {
+                if(coyoteCounter > 0)
+                {
+                    body.velocity = new Vector2(body.velocity.x, jumpForce);
+                }
+            }
+
+            coyoteCounter = 0;
+
+        }
+       
     }
 
+    private void WallJump()
+    {
+
+    }
    
     private bool isgrounded()
     {
