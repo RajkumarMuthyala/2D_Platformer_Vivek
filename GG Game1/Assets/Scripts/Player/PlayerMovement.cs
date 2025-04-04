@@ -17,6 +17,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
+    [Header ("Multiple Jumps")]
+    [SerializeField] private int extraJumps;
+    private int jumpCounter;
+
+    [Header("Wall Jumps")]
+    [SerializeField] private float wallJumpX;
+    [SerializeField] private float wallJumpY;
+
+
+
+
 
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
@@ -72,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
             if(isgrounded())
             {
                 coyoteCounter = coyoteTime;
+                jumpCounter = extraJumps;
             }
             else
             {
@@ -86,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if(coyoteCounter <= 0 && !onWall()) return;
+        if(coyoteCounter <= 0 && !onWall() && jumpCounter <= 0) return;
         SoundManager.instance.PlaySound(jumpSound);
 
         if(onWall())
@@ -103,6 +115,15 @@ public class PlayerMovement : MonoBehaviour
                 {
                     body.velocity = new Vector2(body.velocity.x, jumpForce);
                 }
+                else
+                {
+                    if (jumpCounter > 0)
+                    {
+                        body.velocity = new Vector2(body.velocity.x, jumpForce);
+                        jumpCounter--;
+
+                    }
+                }
             }
 
             coyoteCounter = 0;
@@ -113,7 +134,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallJump()
     {
-
+        body.AddForce(new Vector2(-Mathf.Sign(transform.localScale.x) * wallJumpX, wallJumpY));
+        wallJumpCoolDown = 0;
     }
    
     private bool isgrounded()
