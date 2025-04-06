@@ -73,6 +73,18 @@ public class Health : MonoBehaviour
 
     }
 
+    public void Respwan()
+    {
+        dead = false;
+        AddHealth(startingHealth);
+        anim.ResetTrigger("die");
+        anim.Play("Idle");
+        StartCoroutine(Invunerability());
+
+        foreach (Behaviour component in components)
+            component.enabled = true;
+    }
+
     private IEnumerator Invunerability()
     {
         invulnerable = true;

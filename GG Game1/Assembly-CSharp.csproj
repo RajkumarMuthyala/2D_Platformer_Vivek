@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Player\Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemy\RangedEnemy.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerRespawn.cs" />
     <Compile Include="Assets\Scripts\Traps\Spikehead.cs" />
     <Compile Include="Assets\Scripts\LoadingManager.cs" />
   </ItemGroup>
