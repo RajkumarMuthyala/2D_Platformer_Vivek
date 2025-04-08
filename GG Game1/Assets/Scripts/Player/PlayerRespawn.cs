@@ -16,7 +16,7 @@ public class PlayerRespawn : MonoBehaviour
 
     private void CheckRespawn()
     {
-        if(currentCheckpoint = null)
+        if(currentCheckpoint == null)
         {
             uiManager.GameOver();
 
