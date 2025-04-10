@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,12 +8,27 @@ public class UIManager : MonoBehaviour
 
 
    
-
+    // Game over
       public void GameOver()
     {
             gameOverScreen.SetActive(true);
 
             SoundManager.instance.PlaySound(gameOverSound);
+    }
+
+    // Restart the game 
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Quit()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 
 }

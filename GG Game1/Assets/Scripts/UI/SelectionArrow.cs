@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class SelectionArrow : MonoBehaviour
 {
@@ -16,10 +18,18 @@ public class SelectionArrow : MonoBehaviour
 
     private void Update()
     {
+        // Interact with arrow
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             ChangePosition(-1);
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             ChangePosition(1);
+
+        // Interact with options
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.E))
+            Interact();
+
+
+
     }
     private void ChangePosition(int _change)
     {
@@ -37,5 +47,13 @@ public class SelectionArrow : MonoBehaviour
 
         rect.position = new Vector3(rect.position.x, options[currentPosition].position.y, 0);
 
+    }
+
+    private void Interact()
+    {
+        SoundManager.instance.PlaySound(interactSound);
+
+        // Access the button component
+        options[currentPosition].GetComponent<Button>().onClick.Invoke();   
     }
 }
